@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Hero from "./components/Hero";
 import Contact from "./components/Contact";
 import ProductHolder from "./components/ProductHolder";
+import PartnerHolder from "./components/PartnerHolder";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer"
 import "./App.css";
@@ -10,7 +11,7 @@ import "./App.css";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <div>
           <Navbar />
           <Routes>
@@ -18,9 +19,10 @@ function App() {
             <Route path="/contact" Component={Contact} />
             <Route path="/products" Component={ProductHolder} />
           </Routes>
-          {/* <Footer /> */}
+          <Footer />
         </div>
-      </BrowserRouter>
+      </BrowserRouter> */}
+      <PartnerHolder />
     </>
   );
 }
