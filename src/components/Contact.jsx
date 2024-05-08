@@ -1,5 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import { Switch as HeadlessSwitch } from "@headlessui/react";
+import emailjs from "emailjs-com";
 import { ChevronDownIcon } from "@heroicons/react/20/solid";
 import { Switch } from "@headlessui/react";
 
@@ -8,7 +9,45 @@ function classNames(...classes) {
 }
 
 const Contact = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [message, setMessage] = useState("");
   const [agreed, setAgreed] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Prepare data to send via email.js
+    const templateParams = {
+      firstName,
+      lastName,
+      company,
+      email,
+      phoneNumber,
+      message,
+    };
+    // Send email using email.js
+    emailjs
+      .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams, "YOUR_USER_ID")
+      .then(
+        (response) => {
+          console.log("Email sent successfully!", response);
+          // Reset form fields after successful submission
+          setFirstName("");
+          setLastName("");
+          setCompany("");
+          setEmail("");
+          setPhoneNumber("");
+          setMessage("");
+          setAgreed(false);
+        },
+        (error) => {
+          console.error("Error sending email:", error);
+        }
+      );
+  };
 
   return (
     <div className="isolate bg-white px-6 py-24 sm:py-32 lg:px-8">
@@ -28,11 +67,14 @@ const Contact = () => {
         <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
           Contact sales
         </h2>
-        <p className="mt-2 text-lg leading-8 text-gray-600">
-          Aute magna irure deserunt veniam aliqua magna enim voluptate.
-        </p>
       </div>
-      <form
+      {/* <form
+        action="#"
+        method="POST"
+        className="mx-auto mt-16 max-w-xl sm:mt-20"
+      > */}
+       <form
+        onSubmit={handleSubmit}
         action="#"
         method="POST"
         className="mx-auto mt-16 max-w-xl sm:mt-20"
@@ -127,10 +169,6 @@ const Contact = () => {
                   <option>CA</option>
                   <option>EU</option>
                 </select>
-                <ChevronDownIcon
-                  className="pointer-events-none absolute right-3 top-0 h-full w-5 text-gray-400"
-                  aria-hidden="true"
-                />
               </div>
               <input
                 type="tel"
@@ -192,7 +230,7 @@ const Contact = () => {
             type="submit"
             className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            Let's talk
+            Send
           </button>
         </div>
       </form>
