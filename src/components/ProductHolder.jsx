@@ -96,7 +96,7 @@ const ProductHolder = () => {
       <div className="bg-white py-32">
         <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
           <div className="flex justify-between items-center mb-8">
-          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl text-center">Products</h2>
+          <h2 className="text-3xl font-bold text-gray-900 sm:text-4xl text-center mt-18">Products</h2>
             <input
               type="text"
               placeholder="Search products..."
